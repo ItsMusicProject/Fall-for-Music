@@ -1,0 +1,142 @@
+/* Global Styles */
+body {
+  margin: 0;
+  padding: 0;
+  background: #0e0e0e;
+  color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+}
+
+/* Game Container */
+#game-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+/* Segments */
+.segment {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 2.8rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: fadeIn 1.5s ease forwards;
+}
+
+/* Segment Backgrounds */
+#DropOne      { background: #1a1a1a; }
+#GhostGlide   { background: #111827; }
+#NeonSync     { background: #0f172a; }
+#EchoSpiral   { background: #1e293b; }
+#GlitchRush   { background: #2b2b2b; }
+#BassBurn     { background: #3f3f46; }
+#ZeroGravity  { background: #0a0a0a; }
+
+/* Popup Styling */
+#popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  background: rgba(20, 20, 20, 0.92);
+  border: 1.5px solid #444;
+  border-radius: 12px;
+  padding: 30px;
+  display: none;
+  text-align: center;
+  z-index: 10;
+  width: 85%;
+  max-width: 480px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.08);
+  animation: popFade 0.4s ease forwards;
+}
+
+#popup h2 {
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+  color: #ffffff;
+}
+
+#popup p {
+  margin: 10px 0;
+  font-size: 1.2rem;
+  color: #bbbbbb;
+  line-height: 1.4;
+}
+
+#popup button {
+  margin-top: 20px;
+  padding: 10px 25px;
+  background: transparent;
+  border: 2px solid #00bcd4;
+  color: #00bcd4;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#popup button:hover {
+  background: #00bcd4;
+  color: #0e0e0e;
+}
+
+/* Start Button */
+#start-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px 50px;
+  font-size: 1.5rem;
+  background: transparent;
+  border: 2px solid #00bcd4;
+  color: #00bcd4;
+  border-radius: 8px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+#start-button:hover {
+  background: #00bcd4;
+  color: #0e0e0e;
+  box-shadow: 0 0 20px #00bcd4;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  0%   { opacity: 0; transform: scale(0.96); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes popFade {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.92); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Responsive Tweaks */
+@media (max-width: 600px) {
+  .segment {
+    font-size: 2rem;
+  }
+
+  #popup h2 {
+    font-size: 1.5rem;
+  }
+
+  #popup p {
+    font-size: 1rem;
+  }
+
+  #start-button {
+    padding: 15px 35px;
+    font-size: 1.2rem;
+  }
+}
