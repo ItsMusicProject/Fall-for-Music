@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fall for Music</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0e0e0e;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+    }
+
+    #game-container {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+
+    .segment {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      font-size: 2.5rem;
+      font-weight: bold;
+      transition: all 1s ease;
+    }
+
+    #popup {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(20, 20, 20, 0.95);
+      border: 2px solid #444;
+      border-radius: 10px;
+      padding: 30px;
+      display: none;
+      text-align: center;
+      z-index: 10;
+      width: 80%;
+      max-width: 500px;
+    }
+
+    #popup h2 {
+      margin-bottom: 10px;
+      font-size: 1.8rem;
+    }
+
+    #popup p {
+      margin: 10px 0;
+      font-size: 1.2rem;
+      color: #ccc;
+    }
+
+    #popup button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #00bcd4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    #popup button:hover {
+      background: #0097a7;
+    }
+
+    #start-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px 40px;
+      font-size: 1.5rem;
+      background: #00bcd4;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* Segment Background Colors */
+    #DropOne      { background: #1a1a1a; }
+    #GhostGlide   { background: #111827; }
+    #NeonSync     { background: #0f172a; }
+    #EchoSpiral   { background: #1e293b; }
+    #GlitchRush   { background: #2b2b2b; }
+    #BassBurn     { background: #3f3f46; }
+    #ZeroGravity  { background: #0a0a0a; }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <button id="start-button" onclick="startGame()">Start Fall for Music</button>
+
+    <!-- Game Segments -->
+    <div id="DropOne" class="segment">DROP ONE</div>
+    <div id="GhostGlide" class="segment">GHOST GLIDE</div>
+    <div id="NeonSync" class="segment">NEON SYNC</div>
+    <div id="EchoSpiral" class="segment">ECHO SPIRAL</div>
+    <div id="GlitchRush" class="segment">GLITCH RUSH</div>
+    <div id="BassBurn" class="segment">BASS BURN</div>
+    <div id="ZeroGravity" class="segment">ZERO GRAVITY</div>
+
+    <!-- Pop-up for quote display -->
+    <div id="popup">
+      <h2 id="segmentTitle"></h2>
+      <p id="quote"></p>
+      <p id="comment"></p>
+      <button onclick="nextSegment()">Continue</button>
+    </div>
+  </div>
+
+  <script>
+    const segments = [
+      { id: "DropOne", name: "Drop One" },
+      { id: "GhostGlide", name: "Ghost Glide" },
+      { id: "NeonSync", name: "Neon Sync" },
+      { id: "EchoSpiral", name: "Echo Spiral" },
+      { id: "GlitchRush", name: "Glitch Rush" },
+      { id: "BassBurn", name: "Bass Burn" },
+      { id: "ZeroGravity", name: "Zero Gravity" }
+    ];
+
+    const quotes = {
+      "DropOne": [
+        ["Every journey has a first beat.", "You're flowing already."],
+        ["Falling isn’t failing. It’s moving.", "Vibe check: passed."]
+      ],
+      "GhostGlide": [
+        ["You and the rhythm — same frequency.", "Smooth operator."],
+        ["Don’t chase the beat. Become it.", "Lo-fi master in motion."]
+      ],
+      "NeonSync": [
+        ["The more you move, the clearer it gets.", "Clean sync."],
+        ["You’re not reacting. You’re creating.", "Full control."]
+      ],
+      "EchoSpiral": [
+        ["This is where you grow.", "Chaos managed."],
+        ["Balance in motion. That’s the skill.", "You styled that segment."]
+      ],
+      "GlitchRush": [
+        ["Storms make the music louder.", "You rode the glitch."],
+        ["Keep calm, move smart.", "Fast and flawless."]
+      ],
+      "BassBurn": [
+        ["Strong hands. Strong rhythm.", "That was heavy."],
+        ["You’re leading the beat now.", "Bass approved."]
+      ],
+      "ZeroGravity": [
+        ["You didn’t just fall. You flew.", "Legend status."],
+        ["This was never just a game.", "That was cosmic."]
+      ]
+    };
+
+    let currentIndex = 0;
+
+    function startGame() {
+      document.getElementById("start-button").style.display = "none";
+      showSegment(currentIndex);
+    }
+
+    function showSegment(index) {
+      segments.forEach((seg, i) => {
+        document.getElementById(seg.id).style.display = i === index ? "flex" : "none";
+      });
+
+      // Simulate "gameplay" time before showing quote popup
+      setTimeout(() => {
+        showPopup(segments[index].id, segments[index].name);
+      }, 3000);
+    }
+
+    function showPopup(segmentId, segmentName) {
+      const qSet = quotes[segmentId];
+      const [quote, comment] = qSet[Math.floor(Math.random() * qSet.length)];
+      document.getElementById("segmentTitle").innerText = segmentName + " Complete";
+      document.getElementById("quote").innerText = quote;
+      document.getElementById("comment").innerText = comment;
+      document.getElementById("popup").style.display = "block";
+    }
+
+    function nextSegment() {
+      document.getElementById("popup").style.display = "none";
+      currentIndex++;
+      if (currentIndex < segments.length) {
+        showSegment(currentIndex);
+      } else {
+        alert("Game Complete. You reached Zero Gravity.");
+      }
+    }
+  </script>
+</body>
+    </html>
