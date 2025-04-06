@@ -8,25 +8,90 @@
 </head>
 <body>
   <div id="game-container">
-    <button id="start-button" onclick="startGame()">Start Fall for Music</button>
+    <!-- Start Button -->
+    <button id="start-button">Start Fall for Music</button>
 
-    <!-- Game Segments -->
-    <div id="DropOne" class="segment">DROP ONE</div>
-    <div id="GhostGlide" class="segment">GHOST GLIDE</div>
-    <div id="NeonSync" class="segment">NEON SYNC</div>
-    <div id="EchoSpiral" class="segment">ECHO SPIRAL</div>
-    <div id="GlitchRush" class="segment">GLITCH RUSH</div>
-    <div id="BassBurn" class="segment">BASS BURN</div>
-    <div id="ZeroGravity" class="segment">ZERO GRAVITY</div>
+    <!-- Game Canvas -->
+    <div id="game">
+      <div id="player"></div>
+      <div id="obstacle-container"></div>
+    </div>
 
-    <!-- Pop-up for quote display -->
+    <!-- Pop-up after each level -->
     <div id="popup">
-      <h2 id="segmentTitle"></h2>
-      <p id="quote"></p>
-      <p id="comment"></p>
-      <button onclick="nextSegment()">Continue</button>
+      <div class="popup-content">
+        <h2 id="segmentTitle">Level Complete</h2>
+        <p id="quote">"Every journey has a first beat."</p>
+        <p id="comment">You're flowing already.</p>
+        <div class="popup-buttons">
+          <button onclick="nextSegment()">Continue</button>
+          <button onclick="skipSegment()">Skip</button>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- Templates for levels -->
+  <script>
+    const levelData = [
+      {
+        id: "DropOne",
+        name: "Drop One",
+        quotes: [
+          ["Every journey has a first beat.", "You're flowing already."],
+          ["Falling isn’t failing. It’s moving.", "Vibe check: passed."]
+        ]
+      },
+      {
+        id: "GhostGlide",
+        name: "Ghost Glide",
+        quotes: [
+          ["You and the rhythm — same frequency.", "Smooth operator."],
+          ["Don’t chase the beat. Become it.", "Lo-fi master in motion."]
+        ]
+      },
+      {
+        id: "NeonSync",
+        name: "Neon Sync",
+        quotes: [
+          ["The more you move, the clearer it gets.", "Clean sync."],
+          ["You’re not reacting. You’re creating.", "Full control."]
+        ]
+      },
+      {
+        id: "EchoSpiral",
+        name: "Echo Spiral",
+        quotes: [
+          ["This is where you grow.", "Chaos managed."],
+          ["Balance in motion. That’s the skill.", "You styled that segment."]
+        ]
+      },
+      {
+        id: "GlitchRush",
+        name: "Glitch Rush",
+        quotes: [
+          ["Storms make the music louder.", "You rode the glitch."],
+          ["Keep calm, move smart.", "Fast and flawless."]
+        ]
+      },
+      {
+        id: "BassBurn",
+        name: "Bass Burn",
+        quotes: [
+          ["Strong hands. Strong rhythm.", "That was heavy."],
+          ["You’re leading the beat now.", "Bass approved."]
+        ]
+      },
+      {
+        id: "ZeroGravity",
+        name: "Zero Gravity",
+        quotes: [
+          ["You didn’t just fall. You flew.", "Legend status."],
+          ["This was never just a game.", "That was cosmic."]
+        ]
+      }
+    ];
+  </script>
 
   <script src="script.js"></script>
 </body>
