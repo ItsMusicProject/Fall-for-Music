@@ -1,90 +1,23 @@
-/* Global Styles */
-body {
+/* Reset and base setup */
+* {
   margin: 0;
   padding: 0;
-  background: #0e0e0e;
-  color: #ffffff;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at top, #0f0f0f, #000);
+  color: #f0f0f0;
   overflow: hidden;
-}
-
-/* Game Container */
-#game-container {
-  width: 100vw;
   height: 100vh;
+}
+
+/* Container for the entire game */
+#game-container {
   position: relative;
-}
-
-/* Segments */
-.segment {
-  display: none;
-  justify-content: center;
-  align-items: center;
   width: 100%;
-  height: 100%;
-  font-size: 2.8rem;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  animation: fadeIn 1.5s ease forwards;
-}
-
-/* Segment Backgrounds */
-#DropOne      { background: #1a1a1a; }
-#GhostGlide   { background: #111827; }
-#NeonSync     { background: #0f172a; }
-#EchoSpiral   { background: #1e293b; }
-#GlitchRush   { background: #2b2b2b; }
-#BassBurn     { background: #3f3f46; }
-#ZeroGravity  { background: #0a0a0a; }
-
-/* Popup Styling */
-#popup {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.95);
-  background: rgba(20, 20, 20, 0.92);
-  border: 1.5px solid #444;
-  border-radius: 12px;
-  padding: 30px;
-  display: none;
-  text-align: center;
-  z-index: 10;
-  width: 85%;
-  max-width: 480px;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.08);
-  animation: popFade 0.4s ease forwards;
-}
-
-#popup h2 {
-  margin-bottom: 10px;
-  font-size: 1.8rem;
-  color: #ffffff;
-}
-
-#popup p {
-  margin: 10px 0;
-  font-size: 1.2rem;
-  color: #bbbbbb;
-  line-height: 1.4;
-}
-
-#popup button {
-  margin-top: 20px;
-  padding: 10px 25px;
-  background: transparent;
-  border: 2px solid #00bcd4;
-  color: #00bcd4;
-  border-radius: 6px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-#popup button:hover {
-  background: #00bcd4;
-  color: #0e0e0e;
+  height: 100vh;
 }
 
 /* Start Button */
@@ -93,50 +26,146 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 20px 50px;
-  font-size: 1.5rem;
-  background: transparent;
-  border: 2px solid #00bcd4;
-  color: #00bcd4;
-  border-radius: 8px;
+  background: linear-gradient(135deg, #ff00cc, #3333ff);
+  color: white;
+  padding: 20px 40px;
+  border: none;
+  border-radius: 40px;
+  font-size: 1.4rem;
+  font-weight: bold;
   cursor: pointer;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
+  box-shadow: 0 0 20px #ff00cc80;
+  transition: transform 0.3s ease, background 0.4s ease;
 }
 
 #start-button:hover {
-  background: #00bcd4;
-  color: #0e0e0e;
-  box-shadow: 0 0 20px #00bcd4;
+  transform: translate(-50%, -50%) scale(1.1);
+  background: linear-gradient(135deg, #ff0088, #5555ff);
 }
 
-/* Animations */
-@keyframes fadeIn {
-  0%   { opacity: 0; transform: scale(0.96); }
-  100% { opacity: 1; transform: scale(1); }
+/* Game Area */
+#game {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
-@keyframes popFade {
-  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.92); }
-  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+/* Player (the falling ball) */
+#player {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, #00ffff, #0077ff);
+  border-radius: 50%;
+  left: 50%;
+  top: 10%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 15px #00ffffaa;
+  transition: left 0.1s ease;
 }
 
-/* Responsive Tweaks */
+/* Obstacles */
+#obstacle-container div {
+  position: absolute;
+  width: 80px;
+  height: 20px;
+  background: #ff3333;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ff3333aa;
+}
+
+/* Pop-up */
+#popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(5, 5, 5, 0.8);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.popup-content {
+  background: linear-gradient(to bottom right, #222, #111);
+  border: 2px solid #444;
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  max-width: 90%;
+  width: 400px;
+  color: #ffffff;
+  box-shadow: 0 0 25px #00ffcc50;
+  animation: fadeInUp 0.6s ease;
+}
+
+.popup-content h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #00ffcc;
+}
+
+.popup-content p {
+  font-size: 1.1rem;
+  margin: 10px 0;
+}
+
+.popup-buttons {
+  margin-top: 20px;
+}
+
+.popup-buttons button {
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 10px;
+  border: none;
+  background: #00ffcc;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.popup-buttons button:hover {
+  background: #00cc99;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive scaling */
 @media (max-width: 600px) {
-  .segment {
-    font-size: 2rem;
-  }
-
-  #popup h2 {
-    font-size: 1.5rem;
-  }
-
-  #popup p {
-    font-size: 1rem;
-  }
-
   #start-button {
-    padding: 15px 35px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    padding: 15px 30px;
+  }
+
+  #player {
+    width: 30px;
+    height: 30px;
+  }
+
+  .popup-content {
+    padding: 20px;
+  }
+
+  .popup-content h2 {
+    font-size: 1.4rem;
+  }
+
+  .popup-content p {
+    font-size: 1rem;
   }
 }
